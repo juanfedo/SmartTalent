@@ -4,7 +4,6 @@ namespace Aplicacion.DTO
 {
     public class AlimentoDTO
     {
-        public int Id { get; set; }
         public string Nombre { get; set; } = null!;
 
         [StringLength(maximumLength: 200)]

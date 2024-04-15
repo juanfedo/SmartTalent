@@ -10,6 +10,8 @@ namespace Aplicacion.Utilidades
         {
             CreateMap<Alimento, AlimentoDTO>();
             CreateMap<AlimentoDTO, Alimento>();
+            CreateMap<UsuarioDTO, Usuario>();
+            CreateMap<Usuario, UsuarioDTO>();
         }
     }
 }

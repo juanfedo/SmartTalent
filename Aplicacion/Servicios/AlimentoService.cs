@@ -16,7 +16,6 @@ namespace Aplicacion.Servicios
             _alimentoRepository = repository;
             _mapper = mapper;
         }
-
         public async Task<List<AlimentoDTO>> ObtenerAlimentosAsync(CancellationToken cancellationToken)
         { 
             var alimentos = await _alimentoRepository.ObtenerAlimentosAsync(cancellationToken);
@@ -35,13 +34,14 @@ namespace Aplicacion.Servicios
             await _alimentoRepository.CrearAlimentoAsync(alimento, cancellationToken);
         }
 
-        public async Task ActualizarAlimentoAsync(AlimentoDTO alimento, CancellationToken cancellationToken)
+        public async Task ActualizarAlimentoAsync(int alimentoId, AlimentoDTO alimento, CancellationToken cancellationToken)
         {
-            var alimentoRecuperado = await _alimentoRepository.ObtenerAlimentoPorIdAsync(alimento.Id, cancellationToken);
+            var alimentoRecuperado = await _alimentoRepository.ObtenerAlimentoPorIdAsync(alimentoId, cancellationToken);
             if (alimentoRecuperado != null)
             {
-                var alimentoDTO = _mapper.Map<Alimento>(alimento);
-                await _alimentoRepository.ActualizarAlimentoAsync(alimentoDTO, cancellationToken);
+                var alimentoDb = _mapper.Map<Alimento>(alimento);
+                alimentoDb.Id = alimentoId;
+                await _alimentoRepository.ActualizarAlimentoAsync(alimentoDb, cancellationToken);
             }
         }
 

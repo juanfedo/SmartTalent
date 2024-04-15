@@ -23,6 +23,9 @@ namespace Presentacion
 
             builder.Services.AddScoped<IAlimentoService, AlimentoService>();
             builder.Services.AddScoped<IAlimentoRepository, AlimentoRepository>();
+            builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
 
             var app = builder.Build();
 

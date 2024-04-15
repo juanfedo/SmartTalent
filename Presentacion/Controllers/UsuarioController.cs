@@ -1,46 +1,45 @@
 ﻿using Aplicacion.DTO;
 using Aplicacion.Servicios;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentacion.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AlimentoController : ControllerBase
+    public class UsuarioController : ControllerBase
     {
-        readonly IAlimentoService _alimentoService;
+        readonly IUsuarioService _usuarioService;
 
-        public AlimentoController(IAlimentoService alimentoService)
+        public UsuarioController(IUsuarioService usuarioService)
         {
-            _alimentoService = alimentoService;
+            _usuarioService = usuarioService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<AlimentoDTO>>> Get(CancellationToken cancellationToken)
+        public async Task<ActionResult<List<UsuarioDTO>>> Get(CancellationToken cancellationToken)
         {
-            return await _alimentoService.ObtenerAlimentosAsync(cancellationToken);
+            return await _usuarioService.ObtenerUsuariosAsync(cancellationToken);
         }
 
         [HttpGet("PorId")]
-        public async Task<ActionResult> Get(int alimentoId, CancellationToken cancellationToken)
+        public async Task<ActionResult> Get(int UsuarioId, CancellationToken cancellationToken)
         {
             try
             {
-                return Ok(await _alimentoService.ObtenerAlimentoPorIdAsync(alimentoId, cancellationToken));
+                return Ok(await _usuarioService.ObtenerUsuarioPorIdAsync(UsuarioId, cancellationToken));
             }
-            catch  (Exception ex) 
+            catch (Exception ex)
             {
                 return BadRequest($"Error al procesar la solicitud: {ex.Message}");
             }
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(AlimentoDTO alimentoDTO, CancellationToken cancellationToken)
+        public async Task<ActionResult> Post(UsuarioDTO UsuarioDTO, CancellationToken cancellationToken)
         {
             try
             {
-                await _alimentoService.CrearAlimentoAsync(alimentoDTO, cancellationToken);
+                await _usuarioService.CrearUsuarioAsync(UsuarioDTO, cancellationToken);
                 return Ok();
             }
             catch (Exception ex)
@@ -50,11 +49,11 @@ namespace Presentacion.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put(int alimentoId, AlimentoDTO alimentoDTO, CancellationToken cancellationToken)
+        public async Task<ActionResult> Put(int usuarioId, UsuarioDTO UsuarioDTO, CancellationToken cancellationToken)
         {
             try
             {
-                await _alimentoService.ActualizarAlimentoAsync(alimentoId, alimentoDTO, cancellationToken);
+                await _usuarioService.ActualizarUsuarioAsync(usuarioId, UsuarioDTO, cancellationToken);
                 return Ok();
             }
             catch (Exception ex)
@@ -64,11 +63,11 @@ namespace Presentacion.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult> Delete(int alimentoId, CancellationToken cancellationToken)
+        public async Task<ActionResult> Delete(int UsuarioId, CancellationToken cancellationToken)
         {
             try
             {
-                if (await _alimentoService.BorrarAlimentoAsync(alimentoId, cancellationToken))
+                if (await _usuarioService.BorrarUsuarioAsync(UsuarioId, cancellationToken))
                 {
                     return Ok();
                 }
