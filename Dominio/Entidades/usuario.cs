@@ -17,6 +17,9 @@ namespace Dominio.Entidades
         [Required]
         public bool EsAdministrador { get; set; }
 
+        [Required]
+        public string Correo { get; set; } = null!;
+
         public HashSet<Pedido> Pedidos { get; set; } = new HashSet<Pedido>();
     }
 }

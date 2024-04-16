@@ -15,7 +15,6 @@ namespace Aplicacion.Servicios
             _usuarioRepository = repository;
             _mapper = mapper;
         }
-
         public async Task ActualizarUsuarioAsync(int usuarioId, UsuarioDTO usuario, CancellationToken cancellationToken)
         {
             var UsuarioRecuperado = await _usuarioRepository.ObtenerUsuarioPorIdAsync(usuarioId, cancellationToken);

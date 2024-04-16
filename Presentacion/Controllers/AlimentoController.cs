@@ -17,13 +17,14 @@ namespace Presentacion.Controllers
             _alimentoService = alimentoService;
         }
 
-        //[Authorize(Policy = IdentityData.AdminUserPolicyName)]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<AlimentoGetDTO>>> Get(CancellationToken cancellationToken)
         {
             return Ok(await _alimentoService.ObtenerAlimentosAsync(cancellationToken));
         }
 
+        [Authorize]
         [HttpGet("PorId")]
         public async Task<ActionResult> Get(int alimentoId, CancellationToken cancellationToken)
         {
@@ -37,6 +38,7 @@ namespace Presentacion.Controllers
             }
         }
 
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpPost]
         public async Task<ActionResult> Post(AlimentoDTO alimentoDTO, CancellationToken cancellationToken)
         {
@@ -51,6 +53,7 @@ namespace Presentacion.Controllers
             }
         }
 
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpPut]
         public async Task<ActionResult> Put(int alimentoId, AlimentoDTO alimentoDTO, CancellationToken cancellationToken)
         {
@@ -65,8 +68,7 @@ namespace Presentacion.Controllers
             }
         }
 
-        //[Authorize]
-        //[RequireClaim(IdentityData.AdminUserClaimName, "True")]
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpDelete]
         public async Task<ActionResult> Delete(int alimentoId, CancellationToken cancellationToken)
         {

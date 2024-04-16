@@ -1,5 +1,7 @@
 ﻿using Aplicacion.DTO;
 using Aplicacion.Servicios;
+using Infraestructura.Autenticacion;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentacion.Controllers
@@ -34,6 +36,7 @@ namespace Presentacion.Controllers
             }
         }
 
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpPost]
         public async Task<ActionResult> Post(UsuarioDTO UsuarioDTO, CancellationToken cancellationToken)
         {
@@ -48,6 +51,7 @@ namespace Presentacion.Controllers
             }
         }
 
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpPut]
         public async Task<ActionResult> Put(int usuarioId, UsuarioDTO UsuarioDTO, CancellationToken cancellationToken)
         {
@@ -62,6 +66,7 @@ namespace Presentacion.Controllers
             }
         }
 
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpDelete]
         public async Task<ActionResult> Delete(int UsuarioId, CancellationToken cancellationToken)
         {

@@ -4,15 +4,12 @@ namespace Aplicacion.DTO
 {
     public class UsuarioDTO
     {
-        [Required]
-        [StringLength(maximumLength: 100)]
         public string Login { get; set; } = null!;
 
-        [Required]
-        [StringLength(maximumLength: 100)]
         public string Password { get; set; } = null!;
 
-        [Required]
+        public string Correo { get; set; } = null!;
+
         public bool EsAdministrador { get; set; }
     }
 }

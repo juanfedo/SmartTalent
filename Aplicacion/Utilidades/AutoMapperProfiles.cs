@@ -21,6 +21,11 @@ namespace Aplicacion.Utilidades
             CreateMap<CatalogoPostDTO, Catalogo>();
             CreateMap<AlimentoCatalogoDTO, AlimentoCatalogo>();
             CreateMap<AlimentoCatalogo, AlimentoCatalogoDTO>();
+            CreateMap<Pedido, PedidoDTO>();
+            CreateMap<PedidoDTO, Pedido>();
+            CreateMap<PedidoPostDTO, Pedido>();
+            CreateMap<PedidoDetalle, PedidoDetalleDTO>();
+            CreateMap<PedidoDetalleDTO, PedidoDetalle>();
         }
     }
 }

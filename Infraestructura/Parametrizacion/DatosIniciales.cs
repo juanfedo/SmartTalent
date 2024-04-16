@@ -11,14 +11,16 @@ namespace Infraestructura.Parametrizacion
                 Id = 1,
                 Login = "admin", 
                 Password = "admin", 
-                EsAdministrador = true 
+                EsAdministrador = true,
+                Correo = "administrador@gmail.com"
             };
 
             var usuario = new Usuario() { 
                 Id = 2,
                 Login = "user", 
                 Password = "user", 
-                EsAdministrador = false 
+                EsAdministrador = false,
+                Correo ="usuario@gmail.com"
             };
 
             modelBuilder.Entity<Usuario>().HasData(admin, usuario);

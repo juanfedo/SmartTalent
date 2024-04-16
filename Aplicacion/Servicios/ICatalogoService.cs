@@ -4,8 +4,6 @@ namespace Aplicacion.Servicios
 {
     public interface ICatalogoService
     {
-        Task ActualizarCatalogoAsync(int CatalogoId, CatalogoDTO Catalogo, CancellationToken cancellationToken);
-        Task<bool> BorrarCatalogoAsync(int CatalogoId, CancellationToken cancellationToken);
         Task CrearCatalogoAsync(CatalogoPostDTO CatalogoDTO, CancellationToken cancellationToken);
         Task<CatalogoDTO> ObtenerAlimentosPorCatalogoIdAsync(int catalogoId, CancellationToken cancellationToken);
         Task<CatalogoDTO> ObtenerCatalogoPorIdAsync(int CatalogoId, CancellationToken cancellationToken);

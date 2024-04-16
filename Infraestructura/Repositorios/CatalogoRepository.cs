@@ -2,6 +2,7 @@
 using Infraestructura.Contexto;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Immutable;
+using System.Threading;
 
 namespace Infraestructura.Repositorios
 {
@@ -69,12 +70,6 @@ namespace Infraestructura.Repositorios
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task ActualizarCatalogoAsync(Catalogo Catalogo, CancellationToken cancellationToken)
-        {
-            _context.Update(Catalogo);
-            await _context.SaveChangesAsync(cancellationToken);
-        }
-
         public async Task<bool> BorrarAlimentoCatalogoAsync(int catalogoId, int alimentoId, CancellationToken cancellationToken)
         {
             var catalogo = await _context.Catalogos.FirstOrDefaultAsync(x => x.Id == catalogoId);
@@ -83,12 +78,6 @@ namespace Infraestructura.Repositorios
                 throw new Exception($"No existe el Catalogo para el id {catalogoId}");
             }
             var result = await _context.AlimentoCatalogos.Where(x => x.CatalogoId == catalogoId && x.AlimentoId == alimentoId).ExecuteDeleteAsync(cancellationToken);
-            return result > 0;
-        }
-
-        public async Task<bool> BorrarCatalogoAsync(int catalogoId, CancellationToken cancellationToken)
-        {
-            var result = await _context.Catalogos.Where(x => x.Id == catalogoId).ExecuteDeleteAsync(cancellationToken);
             return result > 0;
         }
     }

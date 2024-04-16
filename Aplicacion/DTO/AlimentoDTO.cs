@@ -6,10 +6,8 @@ namespace Aplicacion.DTO
     {
         public string Nombre { get; set; } = null!;
 
-        [StringLength(maximumLength: 200)]
         public string? Descripcion { get; set; }
 
-        [Required]
         public int Precio { get; set; }
     }
 }

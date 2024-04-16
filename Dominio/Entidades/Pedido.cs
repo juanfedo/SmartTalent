@@ -9,8 +9,13 @@ namespace Dominio.Entidades
         [Required]
         public int UsuarioId { get; set; }
 
+        [Required]
+        public int CatalogoId { get; set; }
+
+        public Catalogo Catalogo { get; set; } = null!;
+
         public Usuario Usuario { get; set; } = null!;
 
-        public HashSet<PedidoDetalle> PedidosDetalle { get; set; } = new HashSet<PedidoDetalle>();
+        public List<PedidoDetalle> PedidosDetalle { get; set; } = new List<PedidoDetalle>();
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Aplicacion.DTO
+﻿namespace Aplicacion.DTO
 {
     public class AlimentoGetDTO: AlimentoDTO
     {

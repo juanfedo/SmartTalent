@@ -1,5 +1,7 @@
 ﻿using Aplicacion.DTO;
 using Aplicacion.Servicios;
+using Infraestructura.Autenticacion;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentacion.Controllers
@@ -15,6 +17,12 @@ namespace Presentacion.Controllers
             _catalogoService = catalogoService;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<List<AlimentoGetDTO>>> Get(CancellationToken cancellationToken)
+        {
+            return Ok(await _catalogoService.ObtenerCatalogosAsync(cancellationToken));
+        }
+
         [HttpGet("PorId")]
         public async Task<ActionResult<CatalogoDTO>> Get(int catalogoId, CancellationToken cancellationToken)
         {
@@ -28,6 +36,7 @@ namespace Presentacion.Controllers
             }
         }
 
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpPost]
         public async Task<ActionResult> Post(CatalogoPostDTO catalogoDTO, CancellationToken cancellationToken)
         {
@@ -56,12 +65,7 @@ namespace Presentacion.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<AlimentoGetDTO>>> Get(CancellationToken cancellationToken)
-        {
-            return Ok(await _catalogoService.ObtenerCatalogosAsync(cancellationToken));
-        }
-
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpDelete("BorrarAlimento")]
         public async Task<ActionResult> Delete(int catalogoId, int alimentoId, CancellationToken cancellationToken)
         {

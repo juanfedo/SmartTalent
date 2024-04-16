@@ -4,8 +4,6 @@ namespace Infraestructura.Repositorios
 {
     public interface ICatalogoRepository
     {
-        Task ActualizarCatalogoAsync(Catalogo Catalogo, CancellationToken cancellationToken);
-        Task<bool> BorrarCatalogoAsync(int CatalogoId, CancellationToken cancellationToken);
         Task CrearCatalogoAsync(Catalogo Catalogo, CancellationToken cancellationToken);
         Task<Catalogo> ObtenerCatalogoPorIdAsync(int CatalogoId, CancellationToken cancellationToken);
         Task<List<Catalogo>> ObtenerCatalogosAsync(CancellationToken cancellationToken);

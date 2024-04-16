@@ -31,7 +31,7 @@ namespace Aplicacion.Servicios
         public async Task AgregarAlimentosCatalogoAsync(int catalogoId, List<AlimentoCatalogoDTO> alimentoCatalogosDTO, CancellationToken cancellationToken)
         {
             List<AlimentoCatalogo> alimentosCatalogo = new List<AlimentoCatalogo>();
-            foreach (AlimentoCatalogoDTO elemento in alimentoCatalogosDTO) 
+            foreach (AlimentoCatalogoDTO elemento in alimentoCatalogosDTO)
             {
                 alimentosCatalogo.Add(new AlimentoCatalogo()
                 {
@@ -61,21 +61,7 @@ namespace Aplicacion.Servicios
             await _catalogoRepository.CrearCatalogoAsync(Catalogo, cancellationToken);
         }
 
-        public async Task ActualizarCatalogoAsync(int CatalogoId, CatalogoDTO Catalogo, CancellationToken cancellationToken)
-        {
-            var CatalogoRecuperado = await _catalogoRepository.ObtenerCatalogoPorIdAsync(CatalogoId, cancellationToken);
-            if (CatalogoRecuperado != null)
-            {
-                var CatalogoDb = _mapper.Map<Catalogo>(Catalogo);
-                CatalogoDb.Id = CatalogoId;
-                await _catalogoRepository.ActualizarCatalogoAsync(CatalogoDb, cancellationToken);
-            }
-        }
-
         public async Task<bool> BorrarAlimentoCatalogoAsync(int catalogoId, int alimentoId, CancellationToken cancellationToken) =>
             await _catalogoRepository.BorrarAlimentoCatalogoAsync(catalogoId, alimentoId, cancellationToken);
-
-        public async Task<bool> BorrarCatalogoAsync(int CatalogoId, CancellationToken cancellationToken) =>
-            await _catalogoRepository.BorrarCatalogoAsync(CatalogoId, cancellationToken);
     }
 }

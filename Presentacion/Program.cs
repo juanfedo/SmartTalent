@@ -1,12 +1,12 @@
 using Aplicacion.Servicios;
-using Infraestructura.Contexto;
-using Infraestructura.Repositorios;
-using Microsoft.EntityFrameworkCore;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Infraestructura.Autenticacion;
-using Microsoft.Extensions.DependencyInjection;
+using Infraestructura.Contexto;
+using Infraestructura.Correo;
+using Infraestructura.Repositorios;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Presentacion
@@ -47,11 +47,11 @@ namespace Presentacion
                 };
             });
 
-           /* builder.Services.AddAuthorization(options =>
+            builder.Services.AddAuthorization(options =>
             {
                 options.AddPolicy(IdentityData.AdminUserPolicyName, p =>
                     p.RequireClaim(IdentityData.AdminUserClaimName, "True"));
-            }); */
+            });
 
             builder.Services.AddScoped<IJWTHandler>(x => ActivatorUtilities.CreateInstance<JWTHandler>(x, secretKey));
             builder.Services.AddScoped<IAutenticacionService, AutenticacionService>();
@@ -61,16 +61,14 @@ namespace Presentacion
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
             builder.Services.AddScoped<ICatalogoRepository, CatalogoRepository>();
             builder.Services.AddScoped<ICatalogoService, CatalogoService>();
-
+            //builder.Services.AddScoped<IServicioCorreo, ServicioCorreo>();
+            builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
+            builder.Services.AddScoped<IPedidoService, PedidoService>();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseAuthentication();
 
