@@ -1,6 +1,7 @@
 ﻿using Aplicacion.DTO;
 using Aplicacion.Servicios;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Infraestructura.Autenticacion;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentacion.Controllers
@@ -16,10 +17,11 @@ namespace Presentacion.Controllers
             _alimentoService = alimentoService;
         }
 
+        //[Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpGet]
-        public async Task<ActionResult<List<AlimentoDTO>>> Get(CancellationToken cancellationToken)
+        public async Task<ActionResult<List<AlimentoGetDTO>>> Get(CancellationToken cancellationToken)
         {
-            return await _alimentoService.ObtenerAlimentosAsync(cancellationToken);
+            return Ok(await _alimentoService.ObtenerAlimentosAsync(cancellationToken));
         }
 
         [HttpGet("PorId")]
@@ -63,6 +65,8 @@ namespace Presentacion.Controllers
             }
         }
 
+        //[Authorize]
+        //[RequireClaim(IdentityData.AdminUserClaimName, "True")]
         [HttpDelete]
         public async Task<ActionResult> Delete(int alimentoId, CancellationToken cancellationToken)
         {

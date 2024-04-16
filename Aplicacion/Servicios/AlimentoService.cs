@@ -1,7 +1,6 @@
 ﻿using Aplicacion.DTO;
 using AutoMapper;
 using Dominio.Entidades;
-using Infraestructura.Contexto;
 using Infraestructura.Repositorios;
 
 namespace Aplicacion.Servicios
@@ -16,16 +15,16 @@ namespace Aplicacion.Servicios
             _alimentoRepository = repository;
             _mapper = mapper;
         }
-        public async Task<List<AlimentoDTO>> ObtenerAlimentosAsync(CancellationToken cancellationToken)
+        public async Task<List<AlimentoGetDTO>> ObtenerAlimentosAsync(CancellationToken cancellationToken)
         { 
             var alimentos = await _alimentoRepository.ObtenerAlimentosAsync(cancellationToken);
-            return _mapper.Map<List<AlimentoDTO>>(alimentos);
+            return _mapper.Map<List<AlimentoGetDTO>>(alimentos);
         }
 
-        public async Task<AlimentoDTO> ObtenerAlimentoPorIdAsync(int alimentoId, CancellationToken cancellationToken)
+        public async Task<AlimentoGetDTO> ObtenerAlimentoPorIdAsync(int alimentoId, CancellationToken cancellationToken)
         {
             var alimento = await _alimentoRepository.ObtenerAlimentoPorIdAsync(alimentoId, cancellationToken);
-            return _mapper.Map<AlimentoDTO>(alimento);
+            return _mapper.Map<AlimentoGetDTO>(alimento);
         }
 
         public async Task CrearAlimentoAsync(AlimentoDTO alimentoDTO, CancellationToken cancellationToken)
@@ -44,7 +43,6 @@ namespace Aplicacion.Servicios
                 await _alimentoRepository.ActualizarAlimentoAsync(alimentoDb, cancellationToken);
             }
         }
-
         public async Task<bool> BorrarAlimentoAsync(int alimentoId, CancellationToken cancellationToken) =>
             await _alimentoRepository.BorrarAlimentoAsync(alimentoId, cancellationToken);
     }

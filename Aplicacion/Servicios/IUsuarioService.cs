@@ -7,7 +7,7 @@ namespace Aplicacion.Servicios
         Task ActualizarUsuarioAsync(int usuarioId, UsuarioDTO usuario, CancellationToken cancellationToken);
         Task<bool> BorrarUsuarioAsync(int usuarioId, CancellationToken cancellationToken);
         Task CrearUsuarioAsync(UsuarioDTO usuario, CancellationToken cancellationToken);
-        Task<UsuarioDTO> ObtenerUsuarioPorIdAsync(int usuarioId, CancellationToken cancellationToken);
-        Task<List<UsuarioDTO>> ObtenerUsuariosAsync(CancellationToken cancellationToken);
+        Task<UsuarioGetDTO> ObtenerUsuarioPorIdAsync(int usuarioId, CancellationToken cancellationToken);
+        Task<List<UsuarioGetDTO>> ObtenerUsuariosAsync(CancellationToken cancellationToken);
     }
 }

@@ -12,6 +12,15 @@ namespace Aplicacion.Utilidades
             CreateMap<AlimentoDTO, Alimento>();
             CreateMap<UsuarioDTO, Usuario>();
             CreateMap<Usuario, UsuarioDTO>();
+            CreateMap<Usuario, UsuarioGetDTO>();
+            CreateMap<UsuarioGetDTO, Usuario>();
+            CreateMap<Alimento, AlimentoGetDTO>();
+            CreateMap<AlimentoGetDTO, Alimento>();
+            CreateMap<CatalogoDTO, Catalogo>();
+            CreateMap<Catalogo, CatalogoDTO>();
+            CreateMap<CatalogoPostDTO, Catalogo>();
+            CreateMap<AlimentoCatalogoDTO, AlimentoCatalogo>();
+            CreateMap<AlimentoCatalogo, AlimentoCatalogoDTO>();
         }
     }
 }

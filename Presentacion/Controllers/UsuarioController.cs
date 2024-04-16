@@ -16,7 +16,7 @@ namespace Presentacion.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<UsuarioDTO>>> Get(CancellationToken cancellationToken)
+        public async Task<ActionResult<List<UsuarioGetDTO>>> Get(CancellationToken cancellationToken)
         {
             return await _usuarioService.ObtenerUsuariosAsync(cancellationToken);
         }

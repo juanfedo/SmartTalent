@@ -10,7 +10,6 @@ namespace Aplicacion.DTO
         public string? Descripcion { get; set; }
 
         [Required]
-        [Range(0, 1000000, ErrorMessage = "Precio debe estar entre 1 y 1000000")]
         public int Precio { get; set; }
     }
 }

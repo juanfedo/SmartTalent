@@ -36,16 +36,16 @@ namespace Aplicacion.Servicios
             await _usuarioRepository.CrearUsuarioAsync(Usuario, cancellationToken);
         }
 
-        public async Task<UsuarioDTO> ObtenerUsuarioPorIdAsync(int usuarioId, CancellationToken cancellationToken)
+        public async Task<UsuarioGetDTO> ObtenerUsuarioPorIdAsync(int usuarioId, CancellationToken cancellationToken)
         {
             var Usuario = await _usuarioRepository.ObtenerUsuarioPorIdAsync(usuarioId, cancellationToken);
-            return _mapper.Map<UsuarioDTO>(Usuario);
+            return _mapper.Map<UsuarioGetDTO>(Usuario);
         }
 
-        public async Task<List<UsuarioDTO>> ObtenerUsuariosAsync(CancellationToken cancellationToken)
+        public async Task<List<UsuarioGetDTO>> ObtenerUsuariosAsync(CancellationToken cancellationToken)
         {
             var Usuarios = await _usuarioRepository.ObtenerUsuariosAsync(cancellationToken);
-            return _mapper.Map<List<UsuarioDTO>>(Usuarios);
+            return _mapper.Map<List<UsuarioGetDTO>>(Usuarios);
         }
     }
 }

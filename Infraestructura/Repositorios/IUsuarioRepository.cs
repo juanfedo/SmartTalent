@@ -9,5 +9,6 @@ namespace Infraestructura.Repositorios
         Task CrearUsuarioAsync(Usuario usuario, CancellationToken cancellationToken);
         Task<Usuario> ObtenerUsuarioPorIdAsync(int usuarioId, CancellationToken cancellationToken);
         Task<List<Usuario>> ObtenerUsuariosAsync(CancellationToken cancellationToken);
+        Task<Usuario> ValidarUsuarioAsync(string login, string password, CancellationToken cancellationToken);
     }
 }

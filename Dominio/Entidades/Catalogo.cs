@@ -7,11 +7,8 @@ namespace Dominio.Entidades
         public int Id { get; set; }
 
         [Required]
-        public int AlimentoId { get; set; }
+        public string Nombre { get; set; } = null!;
 
-        [Required]
-        public int CantidadDisponible { get; set; }
-
-        public Alimento Alimento { get; set; } = null!;
+        public List<AlimentoCatalogo> AlimentosCatalogo { get; set; } = new List<AlimentoCatalogo>();
     }
 }

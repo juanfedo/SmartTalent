@@ -8,7 +8,7 @@ namespace Aplicacion.Servicios
         Task ActualizarAlimentoAsync(int alimentoId, AlimentoDTO alimento, CancellationToken cancellationToken);
         Task<bool> BorrarAlimentoAsync(int alimentoId, CancellationToken cancellationToken);
         Task CrearAlimentoAsync(AlimentoDTO alimento, CancellationToken cancellationToken);
-        Task<AlimentoDTO> ObtenerAlimentoPorIdAsync(int alimentoId, CancellationToken cancellationToken);
-        Task<List<AlimentoDTO>> ObtenerAlimentosAsync(CancellationToken cancellationToken);
+        Task<AlimentoGetDTO> ObtenerAlimentoPorIdAsync(int alimentoId, CancellationToken cancellationToken);
+        Task<List<AlimentoGetDTO>> ObtenerAlimentosAsync(CancellationToken cancellationToken);
     }
 }

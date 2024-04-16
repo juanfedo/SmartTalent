@@ -17,8 +17,8 @@ namespace Dominio.Entidades
         [Range(0, 1000000, ErrorMessage = "Precio debe estar entre 1 y 1000000")]
         public int Precio { get; set;}
 
-        public HashSet<Pedido> Pedidos { get; set; } = new HashSet<Pedido>();
+        public HashSet<PedidoDetalle> PedidosDetalle { get; set; } = new HashSet<PedidoDetalle>();
 
-        public HashSet<Catalogo> Catalogos { get; set; } = new HashSet<Catalogo>();
+        public HashSet<AlimentoCatalogo> AlimentosCatalogo { get; set; } = new HashSet<AlimentoCatalogo>();
     }
 }

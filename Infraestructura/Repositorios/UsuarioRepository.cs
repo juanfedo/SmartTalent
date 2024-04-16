@@ -47,5 +47,19 @@ namespace Infraestructura.Repositorios
         public async Task<List<Usuario>> ObtenerUsuariosAsync(CancellationToken cancellationToken) =>
             await _context.Usuarios.ToListAsync(cancellationToken);
 
+
+        public async Task<Usuario> ValidarUsuarioAsync(string login, string password, CancellationToken cancellationToken)
+        {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Login == login && x.Password == password, cancellationToken: cancellationToken);
+
+            if (usuario == null)
+            {
+                throw new Exception($"Usuario {usuario} no encontrado en la base de datos");
+            }
+
+            return usuario;
+        }
+
     }
 }
