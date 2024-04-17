@@ -1,8 +1,6 @@
 ﻿using Aplicacion.DTO;
 using Aplicacion.Servicios;
-using Infraestructura.Autenticacion;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Presentacion.Controllers
 {
@@ -10,12 +8,10 @@ namespace Presentacion.Controllers
     [ApiController]
     public class AutenticacionController : ControllerBase
     {
-        readonly IJWTHandler _handler;
         readonly IAutenticacionService _autenticacionService;
 
-        public AutenticacionController(IJWTHandler handler, IAutenticacionService autenticacionService)
+        public AutenticacionController(IAutenticacionService autenticacionService)
         {
-            _handler = handler;
             _autenticacionService = autenticacionService;
         }
 
@@ -23,16 +19,19 @@ namespace Presentacion.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] AutenticacionDTO request, CancellationToken cancellationToken)
         {
-            var result = await _autenticacionService.ValidarUsuarioAsync(request.Login, request.Password, cancellationToken);
-
-            if (result != null)
+            try
             {
-                string token = _handler.CreateToken(result.Login, result.EsAdministrador);
-
-                return StatusCode(StatusCodes.Status200OK, new { token });
+                var token = await _autenticacionService.ValidarUsuarioAsync(request.Login, request.Password, cancellationToken);
+                if (token.Length > 0)
+                {
+                    return Ok(new { token });
+                }
+                return BadRequest("Usuario no encontrado");
             }
-
-            return StatusCode(StatusCodes.Status401Unauthorized, new { token = string.Empty });
+            catch (Exception ex)
+            {
+                return BadRequest($"Error al procesar la solicitud: {ex.Message}");
+            }
         }
     }
 }

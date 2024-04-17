@@ -6,6 +6,7 @@ using Infraestructura.Repositorios;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -17,13 +18,40 @@ namespace Presentacion
         {
             var builder = WebApplication.CreateBuilder(args);
             var config = builder.Configuration;
-            // Add services to the container.
-
             builder.Services.AddControllers().
                 AddJsonOptions(opciones => opciones.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(option =>
+            {
+                option.SwaggerDoc("v1", new OpenApiInfo { Title = "SmartTalent", Version = "v1" });
+                option.AddSecurityDefinition(
+                    "Bearer",
+                    new OpenApiSecurityScheme
+                    {
+                        In = ParameterLocation.Header,
+                        Description = "Por favor ingrese un token valido",
+                        Name = "Authorization",
+                        Type = SecuritySchemeType.Http,
+                        BearerFormat = "JWT",
+                        Scheme = "Bearer"
+                    }
+                );
+                option.AddSecurityRequirement(
+                    new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            new string[] { }
+                        }
+                    });
+            });
             builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseSqlServer("name=LocalConnection"), ServiceLifetime.Scoped);
             builder.Services.AddAutoMapper(typeof(Aplicacion.Utilidades.AutoMapperProfiles));
 
@@ -61,7 +89,7 @@ namespace Presentacion
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
             builder.Services.AddScoped<ICatalogoRepository, CatalogoRepository>();
             builder.Services.AddScoped<ICatalogoService, CatalogoService>();
-            //builder.Services.AddScoped<IServicioCorreo, ServicioCorreo>();
+            builder.Services.AddScoped<IServicioCorreo, ServicioCorreo>();
             builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
             builder.Services.AddScoped<IPedidoService, PedidoService>();
 

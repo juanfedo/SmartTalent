@@ -8,12 +8,12 @@ namespace Infraestructura.Repositorios
     public class PedidoRepository : IPedidoRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly ServicioCorreo _correo;
+        private readonly IServicioCorreo _correo;
 
-        public PedidoRepository(ApplicationDbContext context)// ServicioCorreo correo)
+        public PedidoRepository(ApplicationDbContext context, IServicioCorreo correo)
         {
             _context = context;
-            //_correo = correo;
+            _correo = correo;
         }
 
         public async Task EnviarConfirmacionPedidoAsync(int pedidoId, CancellationToken cancellationToken)
@@ -30,7 +30,7 @@ namespace Infraestructura.Repositorios
                 throw new Exception("Usuario no encontrado en la base de datos");
             }
 
-            //_correo.EnviarCorreo(usuario.Correo, pedidoId);
+            _correo.EnviarCorreo(usuario.Correo, pedidoId);
         }
 
         public async Task<List<Pedido>> ObtenerPedidosAsync(CancellationToken cancellationToken)

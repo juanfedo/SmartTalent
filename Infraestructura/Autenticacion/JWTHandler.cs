@@ -24,7 +24,6 @@ namespace Infraestructura.Autenticacion
                 new("EsAdministrador", esAdministrador.ToString())
             };
 
-            //claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, login));
             claims.AddClaims(claimsList);
 
             var tokkenDescriptor = new SecurityTokenDescriptor

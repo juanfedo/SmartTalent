@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentacion.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentacion.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CatalogoController : ControllerBase
@@ -51,6 +52,7 @@ namespace Presentacion.Controllers
             }
         }
 
+        [Authorize(Policy = IdentityData.AdminUserPolicyName)]
         [HttpPost("AgregarAlimentos")]
         public async Task<ActionResult> Post(int catalogoId, List<AlimentoCatalogoDTO> alimentoCatalogosDTO, CancellationToken cancellationToken)
         {

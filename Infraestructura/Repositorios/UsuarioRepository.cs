@@ -55,7 +55,7 @@ namespace Infraestructura.Repositorios
 
             if (usuario == null)
             {
-                throw new Exception($"Usuario {usuario} no encontrado en la base de datos");
+                throw new Exception($"Usuario {login} no encontrado en la base de datos");
             }
 
             return usuario;

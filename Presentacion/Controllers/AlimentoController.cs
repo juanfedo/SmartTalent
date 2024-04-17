@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentacion.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AlimentoController : ControllerBase
@@ -17,14 +18,12 @@ namespace Presentacion.Controllers
             _alimentoService = alimentoService;
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<AlimentoGetDTO>>> Get(CancellationToken cancellationToken)
         {
             return Ok(await _alimentoService.ObtenerAlimentosAsync(cancellationToken));
         }
 
-        [Authorize]
         [HttpGet("PorId")]
         public async Task<ActionResult> Get(int alimentoId, CancellationToken cancellationToken)
         {
