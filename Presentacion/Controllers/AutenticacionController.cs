@@ -22,11 +22,7 @@ namespace Presentacion.Controllers
             try
             {
                 var token = await _autenticacionService.ValidarUsuarioAsync(request.Login, request.Password, cancellationToken);
-                if (token.Length > 0)
-                {
-                    return Ok(new { token });
-                }
-                return BadRequest("Usuario no encontrado");
+                return Ok(new { token });
             }
             catch (Exception ex)
             {
